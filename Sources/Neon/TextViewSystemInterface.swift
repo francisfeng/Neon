@@ -12,7 +12,7 @@ public typealias TextView = UITextView
 public struct TextViewSystemInterface {
 	public typealias AttributeProvider = (Token) -> [NSAttributedString.Key: Any]?
 
-	public let textView: TextView
+  public weak var textView: TextView!
 	public let attributeProvider: AttributeProvider
 
 	public init(textView: TextView, attributeProvider: @escaping AttributeProvider) {
@@ -89,6 +89,9 @@ extension TextViewSystemInterface: TextSystemInterface {
 	}
 
 	public var visibleRange: NSRange {
+    if textView == nil {
+        return .init(location: 0, length: 0)
+    }
 		return textView.visibleTextRange
 	}
 }
