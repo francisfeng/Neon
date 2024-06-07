@@ -9,8 +9,8 @@ let package = Package(
 		.library(name: "Neon", targets: ["Neon"]),
 	],
 	dependencies: [
-		.package(url: "https://github.com/ChimeHQ/SwiftTreeSitter", from: "0.7.1"),
-		.package(url: "https://github.com/ChimeHQ/Rearrange", from: "1.5.3"),
+		.package(url: "https://github.com/ChimeHQ/SwiftTreeSitter", revision: "a9b1335d5151b62b11f07599bd07d07dc5965de3"),
+		.package(url: "https://github.com/ChimeHQ/Rearrange", from: "1.8.1"),
 	],
 	targets: [
 		.target(name: "Neon", dependencies: ["SwiftTreeSitter", "Rearrange", "TreeSitterClient"]),
