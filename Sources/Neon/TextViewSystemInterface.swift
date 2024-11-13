@@ -12,7 +12,7 @@ public typealias TextView = UITextView
 public struct TextViewSystemInterface {
 	public typealias AttributeProvider = (Token) -> [NSAttributedString.Key: Any]?
 
-  public weak var textView: TextView!
+  public weak var textView: TextView?
 	public let attributeProvider: AttributeProvider
 
 	public init(textView: TextView, attributeProvider: @escaping AttributeProvider) {
@@ -22,7 +22,7 @@ public struct TextViewSystemInterface {
 
 	public var layoutManager: NSLayoutManager? {
 		#if os(macOS)
-		return textView.textContainer?.layoutManager
+		return textView?.textContainer?.layoutManager
 		#else
 		return textView.layoutManager
 		#endif
@@ -31,14 +31,14 @@ public struct TextViewSystemInterface {
 	@available(macOS 12.0, iOS 15.0, tvOS 15.0, *)
 	public var textLayoutManager: NSTextLayoutManager? {
 		#if os(macOS)
-		return textView.textContainer?.textLayoutManager
+		return textView?.textContainer?.textLayoutManager
 		#else
 		return textView.textContainer.textLayoutManager
 		#endif
 	}
 
 	public var textStorage: NSTextStorage? {
-		return textView.textStorage
+		return textView?.textStorage
 	}
 }
 
@@ -90,9 +90,9 @@ extension TextViewSystemInterface: TextSystemInterface {
 
 	public var visibleRange: NSRange {
     if textView == nil {
-        return .init(location: 0, length: 0)
+      return .init(location: 0, length: 0)
     }
-		return textView.visibleTextRange
+		return textView!.visibleTextRange
 	}
 }
 
